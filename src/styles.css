@@ -1,0 +1,12 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.btn__decrement:disabled {
+  cursor: not-allowed;
+}
+
+.btn {
+  cursor: pointer;
+}
