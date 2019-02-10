@@ -3,34 +3,45 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
+
+function useFetch(url, reload = []){
+    const [value, setValue ] = useState();
+    const [load, setLoad ] = useState(true);
+
+    async function fetchData(){
+      try {
+
+        const res = await fetch(url);
+        const data = await res.json();
+      
+       setValue(data);
+       setLoad(false);
+
+      } catch(e){
+        console.log(e);
+      }
+    }
+
+    useEffect(() =>{
+      fetchData();
+    }, reload);
+
+    return {value, load }
+
+
+}
+
+
+
+
+
 function App() {
   const [count, setCount] = useState(0);
-  const [user, setUser] = useState("");
 
   useEffect(() => {
     document.title = `You have clicked ${count} times`;
   });
 
-  async function fetchData() {
-    try {
-      const res = await fetch("https://randomuser.me/api");
-      const data = await res.json();
-
-      const last = data.results[0].name.last;
-      const first = data.results[0].name.first;
-
-      setUser({ first, last });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  useEffect(
-    () => {
-      fetchData();
-    },
-    [count]
-  );
 
   const incrementCounter = () => {
     setCount(count + 1);
@@ -41,6 +52,13 @@ function App() {
       setCount(count - 1);
     }
   };
+
+  const { value  , load } = useFetch("https://randomuser.me/api");
+  
+  
+  
+
+  
 
   return (
     <div className="App">
@@ -58,9 +76,9 @@ function App() {
         </button>
       </div>
       <p>User information: </p>
-      <p>
-        {user.first} {user.last}
-      </p>
+      {load ? 
+        <p>Loading</p> :
+         <p> {value.results[0].name.first} {value.results[0].name.last}</p>}
     </div>
   );
 }
