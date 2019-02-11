@@ -10,3 +10,4 @@
  5. Use BEM for className (class)
  6. Use javascript to interact with the title of the page
  7. Demonstrate how hooks can be reusable
+ 8. Play around styled components

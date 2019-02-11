@@ -1,17 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import styled from 'styled-components';
 import Counter from "./Counter";
-import User from "./User";
+import Quote from "./Quote";
+import AppStyle from "./styles/AppStyle";
+
+
+const MainTitle = styled.h1`
+  font-size: 45px;
+  letter-spacing:1.5px;
+  border-bottom: 2px #F44336 solid;
+  display:inline-block;
+  padding-bottom: 5px;
+`;
+
 
 
 function App() {
   
   return (
-    <div className="App">
-    <h1>useFetch Playground</h1>
+    <AppStyle>
+    <MainTitle>useFetch Playground</MainTitle>
       <Counter />
-      <User/>
-    </div>
+      <Quote/>
+    </AppStyle>
   );
 }
 
