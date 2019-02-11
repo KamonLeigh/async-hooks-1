@@ -1,38 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useFetch } from "./hooks";
 
 import "./styles.css";
-
-
-function useFetch(url, reload = []){
-    const [value, setValue ] = useState();
-    const [load, setLoad ] = useState(true);
-
-    async function fetchData(){
-      try {
-
-        const res = await fetch(url);
-        const data = await res.json();
-      
-       setValue(data);
-       setLoad(false);
-
-      } catch(e){
-        console.log(e);
-      }
-    }
-
-    useEffect(() =>{
-      fetchData();
-    }, reload);
-
-    return {value, load }
-
-
-}
-
-
-
 
 
 function App() {
@@ -55,11 +25,6 @@ function App() {
 
   const { value  , load } = useFetch("https://randomuser.me/api");
   
-  
-  
-
-  
-
   return (
     <div className="App">
       {count}
