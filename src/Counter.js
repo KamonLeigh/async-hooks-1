@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { useFetch } from "./hooks";
+import { useFetch } from "./useHooks/hooks";
 import Title from "./styles/TitleStyle";
 import Load from "./styles/LoadingStyle";
-import "./styles.css";
+
 
 
 const User = styled.p`
@@ -14,6 +14,25 @@ const User = styled.p`
 const Count = styled.p`
     font-size: 22px;
     color: #263238;
+`;
+
+
+const Button = styled.button`
+     cursor: pointer;
+     border: 2px solid #1976D2;
+     border-radius: 3px;
+     padding: 4.5px 14px;
+     font-size: 17px;
+     margin: 14px;
+     opacity:1;
+
+     background-color: ${ ({ primary }) => primary ? "#1976d2" : "#fff"};
+     color: ${ ({ primary })=> primary ? "#fff" : "#1976d2"};
+    
+     &:disabled{
+         cursor: not-allowed;
+         opacity:0.4;
+     }
 `;
 
 function Counter() {
@@ -37,21 +56,23 @@ function Counter() {
   const { value  , load } = useFetch("https://randomuser.me/api");
   
   return (
-    <div className="App">
+    <div>
     <Title>Counter:</Title>
         <br/>
       <Count>{count}</Count>
       <div className="count">
-        <button className="btn btn__increment" onClick={incrementCounter}>
+        <Button
+            primary
+            onClick={incrementCounter}
+            >
           Increment +
-        </button>
-        <button
-          className="btn btn__decrement"
+        </Button>
+        <Button
           disabled={count <= 0}
           onClick={decrementCounter}
         >
           Decrement -
-        </button>
+        </Button>
       </div>
       <Title>User information: </Title>
       {load ? 
