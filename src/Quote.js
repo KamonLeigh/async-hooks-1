@@ -22,7 +22,7 @@ function User(){
     return (<Quote>
                 <Title>Quote Generator</Title>
              {error ? 
-                <ErrorTag> Error with request please try again</ErrorTag> :load ?
+                <ErrorTag> <span>Error</span> with request please try again</ErrorTag> :load ?
                 <LoadTag>Loading... </LoadTag> : <div> {value}</div>}
         </Quote>
     )
