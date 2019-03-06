@@ -2,7 +2,8 @@ import React from 'react';
 import { useFetch } from './useHooks/hooks';
 import styled from 'styled-components';
 import Title from './styles/TitleStyle';
-import Load from './styles/LoadingStyle';
+import LoadTag from './styles/LoadingStyle';
+import ErrorTag from './styles/ErrorStyles';
 
 const Quote = styled.p`
     text-align: center;
@@ -13,13 +14,16 @@ const Quote = styled.p`
 `;
 
 
+
 function User(){
 
-    const { value  , load }= useFetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes");
+    const { value  , load, error  }= useFetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes");
 
     return (<Quote>
                 <Title>Quote Generator</Title>
-                {load? <Load>Loading...</Load> : <p>{value}</p>}
+             {error ? 
+                <ErrorTag> Error with request please try again</ErrorTag> :load ?
+                <LoadTag>Loading... </LoadTag> : <div> {value}</div>}
         </Quote>
     )
 }

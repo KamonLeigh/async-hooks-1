@@ -4,6 +4,7 @@ import {useState, useEffect } from 'react';
 export function useFetch(url, reload = []) {
     const [value, setValue] = useState();
     const [load, setLoad] = useState(true);
+    const [error, setError] = useState();
 
     async function fetchData() {
         try {
@@ -15,6 +16,7 @@ export function useFetch(url, reload = []) {
             setLoad(false);
 
         } catch (e) {
+            setError(e)
             console.log(e);
         }
     }
@@ -25,7 +27,8 @@ export function useFetch(url, reload = []) {
 
     return {
         value,
-        load
+        load,
+        error
     }
 
 
